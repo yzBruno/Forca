@@ -10,11 +10,11 @@ def escolher_personagem():
     personagens = {
         'Dragon Ball': ['goku', 'vegeta', 'piccolo', 'bulma', 'kuririn', 'gohan', 'trunks', 'freeza', 'cell',
                         'majinbuu'],
+        'Hunter x Hunter': ['gon', 'killua', 'kurapika', 'leorio', 'hisoka', 'illumi', 'chrollo', 'meruem', 'netero',
+                            'neferpitou'],
         'One Piece': ['luffy', 'zoro', 'nami', 'sanji', 'chopper', 'robin', 'franky', 'brook', 'usopp', 'jinbe'],
         'Naruto': ['naruto', 'sasuke', 'sakura', 'kakashi', 'gaara', 'hinata', 'shikamaru', 'neji', 'rocklee',
-                   'tsunade'],
-        'Hunter x Hunter': ['gon', 'killua', 'kurapika', 'leorio', 'hisoka', 'illumi', 'chrollo', 'meruem', 'netero',
-                            'neferpitou']
+                   'tsunade']
     }
     global anime
     anime = random.choice(list(personagens.keys()))
@@ -32,6 +32,37 @@ def exibir_forca(personagem_oculto, tentativas_restantes):
     print('Tentativas Restantes:', tentativas_restantes)
 
 
+def escolher_frase():
+    """
+    Função para escolher uma frase aleatória do anime escolhido, atruibuindo a variável "frase" a respectiva frase
+    do anime escolhido
+    :return:
+    """
+    frases = {
+        'Dragon Ball': ['É mais de oito mil! ~Vegeta', 'Meu coração é puro... pura maldade! ~Vegeta',
+                        'Os limites só existem se você os deixar existir. ~Goku', 'Você pode destruir mil planetas, '
+                        'galáxias, ou universos, mas não é capaz de destruir este Saiyajin. ~Goku'],
+        'Hunter x Hunter': ['Gon, você é luz. Mas às vezes você brilha tanto que devo desviar o olhar... Mesmo assim, '
+                            'tudo bem se eu ficar ao seu lado?” ~Killua',
+                            'e você estiver mentindo, será fácil para mim. Não terei que mostrar nenhuma misericórdia. '
+                            'Posso derrotá-lo sem hesitação. ~Gon'
+                            'Os enigmas dos ceifadores não precisam de ninguém para responder ~Hisoka',
+                            'Se eu conseguir que meu alvo se mova como eu quero, eu tive sucesso como Caçador. ~Ging'],
+        'One Piece': ['Os anjos nos deram a comida; os demônios, o tempero. ~Sanji',
+                      'Eles se perderam novamente, bando de idiotas! ~Zoro',
+                      'Eu não quero conquistar nada, só acho que a pessoa com mais liberdade do mundo é o rei dos '
+                      'piratas! ~Luffy', 'Você sabe o que os heróis fazem? Vou dar o exemplo de um pedaço de carne, '
+                      'tudo bem? Piratas irão ter um banquete e comê-la, mas os heróis irão dividir com outras pessoas.'
+                      ' Eu quero comer toda a carne! ~Luffy'],
+        'Naruto': ['Trabalho duro é inútil para aqueles que não acreditam em si mesmos. ~Naruto',
+                   'Aqueles que não entendem a verdadeira dor nunca vão entender a verdadeira paz. ~Pain',
+                   'O conceito de esperança não é mais do que desistir. Uma palavra que não contém qualquer '
+                   'significado. ~Madara',
+                   'Às vezes eu gostaria de ser apenas uma nuvem, flutuando. ~Shikamaru']
+    }
+    return random.choice(frases[anime])
+
+
 def forca():
     """
     Função principal da Forca
@@ -41,7 +72,6 @@ def forca():
     personagem_letras = '_' * len(personagem_oculto)
     tentativas_restantes = 6
     letras_erradas = []
-
     print(' Jogo da Forca! '.center(40, '—'))
     print('Se diz fã de anime? Vamos lá provar!')
     print(f'O personagem da vez é do anime {anime}.')
@@ -67,15 +97,9 @@ def forca():
         print('—' * 40)
 
     if '_' not in personagem_letras:
-        print(f'Parabéns! {personagem_oculto} era o/a personagem, e parece que temos um verdadeiro otaku aqui!')
-        if anime == 'Dragon Ball':
-            print('Você pode destruir mil planetas, galáxias, ou universos, mas não é capaz de destruir este Saiyajin.'
-                  '~ Goku')
-        if anime == 'One Piece':
-            print('Os anjos nos deram a comida; os demônios, o tempero. ~ Sanji')
-        if anime == 'Naruto':
-            print('Desista de me fazer desistir! ~ Naruto')
-        if anime == 'Hunter x Hunter':
-            print('Amigos podem seguir caminhos diferentes, mas não deixam de ser amigos. ~ Gon')
+        print('Parabéns! Você acertou, é o/a: ', end='')
+        print(f'{personagem_oculto}'.capitalize())
+        print(f'\nFica uma frase do anime: {escolher_frase()}')
     else:
-        print('Você perdeu! O personagem era:', personagem_oculto)
+        print('Você perdeu! Era o/a: ', end='')
+        print(f'{personagem_oculto}'.capitalize())
